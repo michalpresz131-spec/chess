@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#17211d">
+    <title>Chess — Local two-player game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="game">
+      <header class="game-header">
+        <div>
+          <p class="eyebrow">LOCAL TWO-PLAYER</p>
+          <h1>Chess</h1>
+        </div>
+        <button class="reset-button" id="reset-button" type="button">New game</button>
+      </header>
+
+      <section class="game-layout" aria-label="Chess game">
+        <div class="board-wrap">
+          <div class="board" id="board" role="grid" aria-label="Chess board"></div>
+        </div>
+        <aside class="game-info">
+          <div class="turn-card" aria-live="polite">
+            <span class="turn-indicator" id="turn-indicator" aria-hidden="true"></span>
+            <div>
+              <p class="eyebrow">TO MOVE</p>
+              <p class="turn-text" id="turn-text">White</p>
+            </div>
+          </div>
+          <p class="status" id="status" aria-live="polite">White to move</p>
+          <p class="hint">Select a piece, then choose a highlighted square.</p>
+          <p class="coordinates">White at the bottom · Castling · En passant · Promotion</p>
+        </aside>
+      </section>
+
+      <div class="promotion-backdrop" id="promotion-backdrop" hidden>
+        <section class="promotion-dialog" role="dialog" aria-modal="true" aria-labelledby="promotion-title">
+          <h2 id="promotion-title">Promote pawn</h2>
+          <p>Choose a piece for your pawn.</p>
+          <div class="promotion-options" id="promotion-options"></div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
