@@ -140,6 +140,7 @@ p {
 }
 
 .board {
+  container-type: inline-size;
   position: relative;
   display: grid;
   width: 100%;
@@ -229,7 +230,7 @@ p {
 .piece {
   z-index: 1;
   font-family: "DejaVu Sans", "Arial Unicode MS", serif;
-  font-size: clamp(1.3rem, 5.5vw, 5.2rem);
+  font-size: clamp(1rem, 9.5cqi, 7rem);
   line-height: 1;
   user-select: none;
   transform: translateY(-2%);
@@ -541,10 +542,6 @@ p {
     width: 100%;
     max-width: min(1000px, calc(100vh - 118px));
     justify-self: center;
-  }
-
-  .piece {
-    font-size: clamp(1.1rem, 7vh, 3rem);
   }
 
   .game-info {
