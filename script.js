@@ -57,6 +57,7 @@ function renderLeaderboard() {
     const player = leaderboard[color];
     document.querySelector(`#${side}-name`).value = player.name;
     document.querySelector(`#${side}-player-name`).textContent = playerName(color);
+    document.querySelector(`#${side}-board-name`).textContent = playerName(color);
     document.querySelector(`#${side}-points`).textContent = String(player.wins + player.draws / 2);
     document.querySelector(`#${side}-record`).textContent = `${player.wins}-${player.draws}-${player.losses}`;
   }
@@ -523,6 +524,7 @@ for (const color of ["w", "b"]) {
     leaderboard[color].name = nameInput.value;
     saveLeaderboard();
     document.querySelector(`#${side}-player-name`).textContent = playerName(color);
+    document.querySelector(`#${side}-board-name`).textContent = playerName(color);
     renderStatus();
   });
 }

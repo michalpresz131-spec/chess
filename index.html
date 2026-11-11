@@ -20,7 +20,15 @@
 
       <section class="game-layout" aria-label="Chess game">
         <div class="board-wrap">
+          <div class="board-player black" aria-live="polite">
+            <span class="board-player-marker" aria-hidden="true"></span>
+            <span id="black-board-name">Black</span>
+          </div>
           <div class="board" id="board" role="grid" aria-label="Chess board"></div>
+          <div class="board-player white" aria-live="polite">
+            <span class="board-player-marker" aria-hidden="true"></span>
+            <span id="white-board-name">White</span>
+          </div>
         </div>
         <aside class="game-info">
           <section class="player-fields" aria-labelledby="player-fields-title">
@@ -32,16 +40,18 @@
               <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Black" aria-label="Black player name" autocomplete="off">
             </label>
           </section>
-          <div class="turn-card" aria-live="polite">
-            <span class="turn-indicator" id="turn-indicator" aria-hidden="true"></span>
-            <div>
-              <p class="eyebrow">TO MOVE</p>
-              <p class="turn-text" id="turn-text">White</p>
+          <section class="game-status" aria-label="Game status">
+            <div class="turn-card" aria-live="polite">
+              <span class="turn-indicator" id="turn-indicator" aria-hidden="true"></span>
+              <div>
+                <p class="eyebrow">TO MOVE</p>
+                <p class="turn-text" id="turn-text">White</p>
+              </div>
             </div>
-          </div>
-          <p class="status" id="status" aria-live="polite">White to move</p>
-          <p class="hint">Select a piece, then choose a highlighted square.</p>
-          <p class="coordinates">White at the bottom · Castling · En passant · Promotion</p>
+            <p class="status" id="status" aria-live="polite">White to move</p>
+            <p class="hint">Select a piece, then choose a highlighted square.</p>
+            <p class="coordinates">White at the bottom · Castling · En passant · Promotion</p>
+          </section>
           <section class="leaderboard" aria-labelledby="leaderboard-title">
             <h2 id="leaderboard-title">Leaderboard</h2>
             <table>
