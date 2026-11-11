@@ -91,6 +91,16 @@ h1 {
   gap: 28px;
 }
 
+.player-details {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 9px;
+}
+
 .black-side {
   grid-area: black;
 }
@@ -101,6 +111,10 @@ h1 {
 }
 
 .white-side .player-name-side {
+  text-align: right;
+}
+
+.white-side .player-move-text {
   text-align: right;
 }
 
@@ -276,7 +290,7 @@ h1 {
 .game-info {
   grid-area: info;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
   gap: 24px;
   padding-top: 2px;
@@ -287,11 +301,6 @@ h1 {
 }
 
 .player-name-side {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  transform: translateY(-50%);
   display: grid;
   min-width: 0;
   align-content: center;
@@ -322,48 +331,16 @@ h1 {
   outline: 2px solid rgb(228 189 112 / 25%);
 }
 
-.turn-card {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 16px;
-  border: 1px solid #34463a;
-  border-radius: 9px;
-  background: rgb(37 51 43 / 78%);
-}
-
-.turn-card .eyebrow {
-  margin-bottom: 4px;
-  font-size: 0.62rem;
-}
-
-.turn-indicator {
-  width: 29px;
-  height: 29px;
-  flex: 0 0 auto;
-  border: 2px solid #d6dacd;
-  border-radius: 50%;
-  background: #f5f2e9;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
-}
-
-.turn-indicator.black {
-  border-color: #77877b;
-  background: #26342b;
-}
-
-.turn-text {
+.player-move-text {
+  min-height: 1.3em;
   margin: 0;
-  font-size: 1rem;
+  color: #f2d394;
+  font-size: 0.86rem;
   font-weight: 600;
 }
 
-.status {
-  min-height: 1.5em;
-  margin: 24px 0 8px;
-  color: #f2d394;
-  font-size: 1.05rem;
-  font-weight: 600;
+.game-help {
+  min-width: 0;
 }
 
 .hint,
@@ -528,6 +505,11 @@ h1 {
     transform: none;
   }
 
+  .player-details {
+    position: static;
+    transform: none;
+  }
+
   .game-info {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
@@ -560,26 +542,34 @@ h1 {
   }
 
   .game-layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(64vh, 360px)) minmax(0, 1fr);
     grid-template-areas:
-      "black white"
-      "board board"
-      "info info";
+      "black board white"
+      "info info info";
     gap: 18px;
     justify-content: center;
   }
 
   .game-side {
-    position: static;
+    position: relative;
     display: grid;
-    align-self: start;
+    align-self: stretch;
     align-content: start;
-    gap: 16px;
+    gap: 28px;
+  }
+
+  .player-details {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    transform: translateY(-50%);
   }
 
   .player-name-side {
     position: static;
     transform: none;
+    width: 100%;
   }
 
   .board-wrap {

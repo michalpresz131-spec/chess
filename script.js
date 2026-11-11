@@ -1,7 +1,6 @@
 const boardElement = document.querySelector("#board");
-const statusElement = document.querySelector("#status");
-const turnTextElement = document.querySelector("#turn-text");
-const turnIndicatorElement = document.querySelector("#turn-indicator");
+const whiteMoveTextElement = document.querySelector("#white-move-text");
+const blackMoveTextElement = document.querySelector("#black-move-text");
 const promotionBackdrop = document.querySelector("#promotion-backdrop");
 const promotionOptionsElement = document.querySelector("#promotion-options");
 const leaderboardStorageKey = "chess-leaderboard";
@@ -434,18 +433,24 @@ function pieceName(piece) {
 function renderStatus() {
   const checked = isInCheck(game, game.turn);
   const hasMoves = allLegalMoves(game).length > 0;
-  const player = playerName(game.turn);
-  turnTextElement.textContent = hasMoves ? player : "Game over";
-  turnIndicatorElement.classList.toggle("black", game.turn === "b");
+  const messages = { w: "Waiting", b: "Waiting" };
   if (!hasMoves) {
     const winner = checked ? (game.turn === "w" ? "b" : "w") : null;
     recordGameResult(winner);
-    statusElement.textContent = checked
-      ? `Checkmate — ${playerName(winner)} wins`
-      : "Draw — stalemate";
-    return;
+    if (winner) {
+      messages[winner] = `${playerName(winner)} wins`;
+      messages[game.turn] = "Checkmate";
+    } else {
+      messages.w = "Draw — stalemate";
+      messages.b = "Draw — stalemate";
+    }
+  } else {
+    messages[game.turn] = checked
+      ? `${playerName(game.turn)} is in check`
+      : `${playerName(game.turn)} to move`;
   }
-  statusElement.textContent = checked ? `${player} is in check` : `${player} to move`;
+  whiteMoveTextElement.textContent = messages.w;
+  blackMoveTextElement.textContent = messages.b;
 }
 
 function render() {

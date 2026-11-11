@@ -16,10 +16,13 @@
             <p class="eyebrow">LOCAL TWO-PLAYER</p>
             <h1>Chess</h1>
           </div>
-          <label class="player-name-side" for="black-name">
-            Black
-            <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Enter name" aria-label="Black player name" autocomplete="off">
-          </label>
+          <div class="player-details">
+            <label class="player-name-side" for="black-name">
+              Black
+              <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Enter name" aria-label="Black player name" autocomplete="off">
+            </label>
+            <p class="player-move-text" id="black-move-text" aria-live="polite">Waiting</p>
+          </div>
         </div>
         <div class="board-wrap">
           <div class="board-player black" aria-live="polite">
@@ -34,21 +37,16 @@
         </div>
         <div class="game-side white-side">
           <button class="reset-button" id="reset-button" type="button">New game</button>
-          <label class="player-name-side" for="white-name">
-            White
-            <input class="player-name-input" id="white-name" type="text" maxlength="20" placeholder="Enter name" aria-label="White player name" autocomplete="off">
-          </label>
+          <div class="player-details">
+            <label class="player-name-side" for="white-name">
+              White
+              <input class="player-name-input" id="white-name" type="text" maxlength="20" placeholder="Enter name" aria-label="White player name" autocomplete="off">
+            </label>
+            <p class="player-move-text" id="white-move-text" aria-live="polite">White to move</p>
+          </div>
         </div>
         <aside class="game-info">
-          <section class="game-status" aria-label="Game status">
-            <div class="turn-card" aria-live="polite">
-              <span class="turn-indicator" id="turn-indicator" aria-hidden="true"></span>
-              <div>
-                <p class="eyebrow">TO MOVE</p>
-                <p class="turn-text" id="turn-text">White</p>
-              </div>
-            </div>
-            <p class="status" id="status" aria-live="polite">White to move</p>
+          <section class="game-help" aria-label="Game help">
             <p class="hint">Select a piece, then choose a highlighted square.</p>
             <p class="coordinates">White at the bottom · Castling · En passant · Promotion</p>
           </section>
