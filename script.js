@@ -8,12 +8,12 @@ const leaderboardStorageKey = "chess-leaderboard";
 const leaderboard = loadLeaderboard();
 
 const pieceSymbols = {
-  K: "♔",
-  Q: "♕",
-  R: "♖",
-  B: "♗",
-  N: "♘",
-  P: "♙",
+  K: "♚",
+  Q: "♛",
+  R: "♜",
+  B: "♝",
+  N: "♞",
+  P: "♟",
   k: "♚",
   q: "♛",
   r: "♜",

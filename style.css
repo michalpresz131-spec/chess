@@ -167,12 +167,22 @@ h1 {
 
 .piece.white {
   color: #fffdf6;
-  text-shadow: 0 2px 2px rgb(0 0 0 / 55%), 0 0 1px #17211d;
+  background: linear-gradient(145deg, #fff 8%, #f2ecdc 42%, #c1b9a7 72%, #fff 94%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #514f46;
+  filter: drop-shadow(0 1px 0 #fff) drop-shadow(0 2px 0 rgb(65 62 54 / 75%)) drop-shadow(0 4px 2px rgb(0 0 0 / 48%)) drop-shadow(0 6px 2px rgb(0 0 0 / 30%));
 }
 
 .piece.black {
-  color: #1d2821;
-  text-shadow: 0 1px 0 rgb(255 255 255 / 35%);
+  color: #202a23;
+  background: linear-gradient(145deg, #9aa493 4%, #4f5c50 32%, #1c261f 68%, #394638 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.65px #8a9788;
+  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 70%)) drop-shadow(0 3px 1px rgb(0 0 0 / 55%)) drop-shadow(0 5px 2px rgb(0 0 0 / 34%));
 }
 
 .rank-label,
