@@ -10,15 +10,17 @@
   </head>
   <body>
     <main class="game">
-      <header class="game-header">
-        <div>
-          <p class="eyebrow">LOCAL TWO-PLAYER</p>
-          <h1>Chess</h1>
-        </div>
-        <button class="reset-button" id="reset-button" type="button">New game</button>
-      </header>
-
       <section class="game-layout" aria-label="Chess game">
+        <div class="game-side black-side">
+          <div class="game-title">
+            <p class="eyebrow">LOCAL TWO-PLAYER</p>
+            <h1>Chess</h1>
+          </div>
+          <label class="player-name-side" for="black-name">
+            Black
+            <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Enter name" aria-label="Black player name" autocomplete="off">
+          </label>
+        </div>
         <div class="board-wrap">
           <div class="board-player black" aria-live="polite">
             <span class="board-player-marker" aria-hidden="true"></span>
@@ -30,16 +32,14 @@
             <span id="white-board-name">White</span>
           </div>
         </div>
+        <div class="game-side white-side">
+          <button class="reset-button" id="reset-button" type="button">New game</button>
+          <label class="player-name-side" for="white-name">
+            White
+            <input class="player-name-input" id="white-name" type="text" maxlength="20" placeholder="Enter name" aria-label="White player name" autocomplete="off">
+          </label>
+        </div>
         <aside class="game-info">
-          <section class="player-fields" aria-labelledby="player-fields-title">
-            <h2 id="player-fields-title">Players</h2>
-            <label class="player-name-field" for="white-name">
-              <input class="player-name-input" id="white-name" type="text" maxlength="20" placeholder="White" aria-label="White player name" autocomplete="off">
-            </label>
-            <label class="player-name-field" for="black-name">
-              <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Black" aria-label="Black player name" autocomplete="off">
-            </label>
-          </section>
           <section class="game-status" aria-label="Game status">
             <div class="turn-card" aria-live="polite">
               <span class="turn-indicator" id="turn-indicator" aria-hidden="true"></span>

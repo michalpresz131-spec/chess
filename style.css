@@ -30,14 +30,7 @@ button {
 .game {
   width: min(1280px, 100%);
   margin: 0 auto;
-  padding: 48px 32px 56px;
-}
-
-.game-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  padding: 32px 32px 56px;
 }
 
 .eyebrow {
@@ -80,13 +73,43 @@ h1 {
 
 .game-layout {
   display: grid;
-  grid-template-columns: minmax(0, 900px);
+  grid-template-columns: minmax(140px, 1fr) minmax(0, 800px) minmax(140px, 1fr);
+  grid-template-areas:
+    "black board white"
+    "info info info";
   justify-content: center;
   align-items: start;
   gap: 24px;
 }
 
+.game-side {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  align-self: stretch;
+  gap: 28px;
+}
+
+.black-side {
+  grid-area: black;
+}
+
+.white-side {
+  grid-area: white;
+  justify-items: end;
+}
+
+.white-side .player-name-side {
+  text-align: right;
+}
+
+.white-side .reset-button {
+  justify-self: end;
+}
+
 .board-wrap {
+  grid-area: board;
   width: 100%;
   padding: 9px;
   border: 1px solid rgb(255 255 255 / 9%);
@@ -116,6 +139,10 @@ h1 {
   box-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
+.board-player.black {
+  margin-bottom: 5px;
+}
+
 .board-player.black .board-player-marker {
   border-color: #9aa493;
   background: #1d2821;
@@ -127,7 +154,9 @@ h1 {
 
 .board {
   display: grid;
-  grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+  width: 100%;
+  aspect-ratio: 1;
+  grid-template: repeat(8, minmax(0, 1fr)) / repeat(8, minmax(0, 1fr));
   overflow: hidden;
   border-radius: 4px;
 }
@@ -135,6 +164,8 @@ h1 {
 .square {
   position: relative;
   display: grid;
+  min-width: 0;
+  min-height: 0;
   aspect-ratio: 1;
   place-items: center;
   padding: 0;
@@ -190,7 +221,7 @@ h1 {
 .piece {
   z-index: 1;
   font-family: "DejaVu Sans", "Arial Unicode MS", serif;
-  font-size: clamp(1.7rem, 7.3vw, 5.2rem);
+  font-size: clamp(1.3rem, 5.5vw, 5.2rem);
   line-height: 1;
   user-select: none;
   transform: translateY(-2%);
@@ -243,6 +274,7 @@ h1 {
 }
 
 .game-info {
+  grid-area: info;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
@@ -254,24 +286,19 @@ h1 {
   min-width: 0;
 }
 
-.player-fields {
+.player-name-side {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  transform: translateY(-50%);
   display: grid;
-  gap: 10px;
-}
-
-.player-fields h2 {
-  margin-bottom: 0;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.player-name-field {
-  display: grid;
-  gap: 5px;
+  min-width: 0;
+  align-content: center;
+  gap: 9px;
   color: #a7b3a5;
-  font-size: 0.76rem;
-  font-weight: 700;
+  font-size: 0.88rem;
+  font-weight: 600;
 }
 
 .player-name-input {
@@ -476,12 +503,29 @@ h1 {
 
 @media (max-width: 760px) {
   .game {
-    padding: 28px 18px 36px;
+    padding: 20px 18px 36px;
   }
 
   .game-layout {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "black white"
+      "board board"
+      "info info";
     gap: 20px;
+  }
+
+  .game-side {
+    position: static;
+    display: grid;
+    align-self: start;
+    align-content: start;
+    gap: 16px;
+  }
+
+  .player-name-side {
+    position: static;
+    transform: none;
   }
 
   .game-info {
@@ -512,17 +556,30 @@ h1 {
 
 @media (max-width: 900px) and (orientation: landscape) {
   .game {
-    padding: 16px 20px 24px;
-  }
-
-  .game-header {
-    margin-bottom: 16px;
+    padding: 12px 20px 24px;
   }
 
   .game-layout {
-    grid-template-columns: minmax(0, min(70vh, 900px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "black white"
+      "board board"
+      "info info";
     gap: 18px;
     justify-content: center;
+  }
+
+  .game-side {
+    position: static;
+    display: grid;
+    align-self: start;
+    align-content: start;
+    gap: 16px;
+  }
+
+  .player-name-side {
+    position: static;
+    transform: none;
   }
 
   .board-wrap {
