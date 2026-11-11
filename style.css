@@ -263,6 +263,66 @@ h1 {
   font-size: 0.78rem;
 }
 
+.leaderboard {
+  margin-top: 28px;
+}
+
+.leaderboard h2 {
+  margin-bottom: 12px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.leaderboard th,
+.leaderboard td {
+  padding: 9px 5px;
+  border-bottom: 1px solid #34463a;
+}
+
+.leaderboard thead th {
+  color: #a7b3a5;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.leaderboard td {
+  color: #f2d394;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-name {
+  width: 100%;
+  min-width: 0;
+  padding: 5px 6px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #f2f3ee;
+  background: transparent;
+  font-size: 0.82rem;
+}
+
+.player-name:hover,
+.player-name:focus {
+  border-color: #536459;
+  background: #25332b;
+}
+
+.leaderboard-note {
+  margin: 10px 0 0;
+  color: #a7b3a5;
+  font-size: 0.72rem;
+}
+
 .promotion-backdrop {
   position: fixed;
   z-index: 5;
@@ -360,6 +420,11 @@ h1 {
     grid-column: 1 / -1;
     margin: 13px 0 0;
     padding-top: 12px;
+  }
+
+  .leaderboard {
+    grid-column: 1 / -1;
+    margin-top: 8px;
   }
 }
 

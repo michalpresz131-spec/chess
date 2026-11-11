@@ -4,6 +4,8 @@ const turnTextElement = document.querySelector("#turn-text");
 const turnIndicatorElement = document.querySelector("#turn-indicator");
 const promotionBackdrop = document.querySelector("#promotion-backdrop");
 const promotionOptionsElement = document.querySelector("#promotion-options");
+const leaderboardStorageKey = "chess-leaderboard";
+const leaderboard = loadLeaderboard();
 
 const pieceSymbols = {
   K: "♔",
@@ -27,6 +29,46 @@ let selectedSquare = null;
 let selectedMoves = [];
 let lastMove = null;
 let pendingPromotion = null;
+let gameResultRecorded = false;
+
+function loadLeaderboard() {
+  const saved = localStorage.getItem(leaderboardStorageKey);
+  if (!saved) {
+    return {
+      w: { name: "White", wins: 0, draws: 0, losses: 0 },
+      b: { name: "Black", wins: 0, draws: 0, losses: 0 },
+    };
+  }
+  return JSON.parse(saved);
+}
+
+function saveLeaderboard() {
+  localStorage.setItem(leaderboardStorageKey, JSON.stringify(leaderboard));
+}
+
+function renderLeaderboard() {
+  for (const color of ["w", "b"]) {
+    const side = color === "w" ? "white" : "black";
+    const player = leaderboard[color];
+    document.querySelector(`#${side}-name`).value = player.name;
+    document.querySelector(`#${side}-points`).textContent = String(player.wins + player.draws / 2);
+    document.querySelector(`#${side}-record`).textContent = `${player.wins}-${player.draws}-${player.losses}`;
+  }
+}
+
+function recordGameResult(winner) {
+  if (gameResultRecorded) return;
+  gameResultRecorded = true;
+  if (winner) {
+    leaderboard[winner].wins += 1;
+    leaderboard[winner === "w" ? "b" : "w"].losses += 1;
+  } else {
+    leaderboard.w.draws += 1;
+    leaderboard.b.draws += 1;
+  }
+  saveLeaderboard();
+  renderLeaderboard();
+}
 
 function initialGame() {
   return {
@@ -389,6 +431,7 @@ function renderStatus() {
   turnTextElement.textContent = hasMoves ? player : "Game over";
   turnIndicatorElement.classList.toggle("black", game.turn === "b");
   if (!hasMoves) {
+    recordGameResult(checked ? (game.turn === "w" ? "b" : "w") : null);
     statusElement.textContent = checked
       ? `Checkmate — ${game.turn === "w" ? "Black" : "White"} wins`
       : "Draw — stalemate";
@@ -460,9 +503,19 @@ function startNewGame() {
   selectedMoves = [];
   lastMove = null;
   pendingPromotion = null;
+  gameResultRecorded = false;
   promotionBackdrop.hidden = true;
   render();
 }
 
 document.querySelector("#reset-button").addEventListener("click", startNewGame);
+for (const color of ["w", "b"]) {
+  const side = color === "w" ? "white" : "black";
+  const nameInput = document.querySelector(`#${side}-name`);
+  nameInput.addEventListener("input", () => {
+    leaderboard[color].name = nameInput.value.trim() || (color === "w" ? "White" : "Black");
+    saveLeaderboard();
+  });
+}
+renderLeaderboard();
 startNewGame();

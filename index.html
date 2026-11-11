@@ -33,6 +33,31 @@
           <p class="status" id="status" aria-live="polite">White to move</p>
           <p class="hint">Select a piece, then choose a highlighted square.</p>
           <p class="coordinates">White at the bottom · Castling · En passant · Promotion</p>
+          <section class="leaderboard" aria-labelledby="leaderboard-title">
+            <h2 id="leaderboard-title">Leaderboard</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Player</th>
+                  <th scope="col">Pts</th>
+                  <th scope="col">W-D-L</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><input class="player-name" id="white-name" type="text" maxlength="20" aria-label="White player name"></th>
+                  <td id="white-points">0</td>
+                  <td id="white-record">0-0-0</td>
+                </tr>
+                <tr>
+                  <th scope="row"><input class="player-name" id="black-name" type="text" maxlength="20" aria-label="Black player name"></th>
+                  <td id="black-points">0</td>
+                  <td id="black-record">0-0-0</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="leaderboard-note">Wins earn 1 point; draws earn ½.</p>
+          </section>
         </aside>
       </section>
 
