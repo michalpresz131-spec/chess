@@ -55,12 +55,17 @@ p {
   background: #304137;
 }
 
+.game-layout > .reset-button {
+  padding: 7px 12px;
+  font-size: 0.85rem;
+}
+
 .game-layout {
   display: grid;
   grid-template-columns: minmax(0, 1000px);
   grid-template-areas:
-    "board"
     "reset"
+    "board"
     "info";
   justify-content: center;
   align-items: start;
@@ -73,7 +78,7 @@ p {
   --watermark-side: 9px;
   position: relative;
   width: 100%;
-  max-width: min(1000px, calc(100vh - 66px));
+  max-width: min(1000px, calc(100vh - 124px));
   justify-self: center;
   padding: 9px 9px 0;
   border: 1px solid rgb(255 255 255 / 9%);
@@ -478,8 +483,8 @@ p {
   .game-layout {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "board"
       "reset"
+      "board"
       "info";
     gap: 16px;
   }
@@ -512,6 +517,12 @@ p {
   }
 }
 
+@media (max-width: 760px) and (orientation: portrait) {
+  .board-wrap {
+    max-width: min(100%, calc(100vh - 132px));
+  }
+}
+
 @media (max-width: 900px) and (orientation: landscape) {
   .game {
     padding: 12px 20px 24px;
@@ -520,15 +531,15 @@ p {
   .game-layout {
     grid-template-columns: minmax(0, 1000px);
     grid-template-areas:
-      "board"
       "reset"
+      "board"
       "info";
     gap: 14px;
   }
 
   .board-wrap {
     width: 100%;
-    max-width: min(1000px, calc(100vh - 66px));
+    max-width: min(1000px, calc(100vh - 118px));
     justify-self: center;
   }
 
