@@ -23,6 +23,15 @@
           <div class="board" id="board" role="grid" aria-label="Chess board"></div>
         </div>
         <aside class="game-info">
+          <section class="player-fields" aria-labelledby="player-fields-title">
+            <h2 id="player-fields-title">Players</h2>
+            <label class="player-name-field" for="white-name">
+              <input class="player-name-input" id="white-name" type="text" maxlength="20" placeholder="White" aria-label="White player name" autocomplete="off">
+            </label>
+            <label class="player-name-field" for="black-name">
+              <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Black" aria-label="Black player name" autocomplete="off">
+            </label>
+          </section>
           <div class="turn-card" aria-live="polite">
             <span class="turn-indicator" id="turn-indicator" aria-hidden="true"></span>
             <div>
@@ -45,12 +54,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row"><input class="player-name" id="white-name" type="text" maxlength="20" aria-label="White player name"></th>
+                  <th id="white-player-name" scope="row">White</th>
                   <td id="white-points">0</td>
                   <td id="white-record">0-0-0</td>
                 </tr>
                 <tr>
-                  <th scope="row"><input class="player-name" id="black-name" type="text" maxlength="20" aria-label="Black player name"></th>
+                  <th id="black-player-name" scope="row">Black</th>
                   <td id="black-points">0</td>
                   <td id="black-record">0-0-0</td>
                 </tr>

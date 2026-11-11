@@ -215,6 +215,48 @@ h1 {
   padding-top: 2px;
 }
 
+.player-fields {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.player-fields h2 {
+  margin-bottom: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.player-name-field {
+  display: grid;
+  gap: 5px;
+  color: #a7b3a5;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.player-name-input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid #536459;
+  border-radius: 6px;
+  color: #f2f3ee;
+  background: #25332b;
+  font: inherit;
+}
+
+.player-name-input::placeholder {
+  color: #a7b3a5;
+  opacity: 1;
+}
+
+.player-name-input:focus {
+  border-color: var(--accent);
+  outline: 2px solid rgb(228 189 112 / 25%);
+}
+
 .turn-card {
   display: flex;
   align-items: center;
@@ -310,23 +352,6 @@ h1 {
   font-variant-numeric: tabular-nums;
 }
 
-.player-name {
-  width: 100%;
-  min-width: 0;
-  padding: 5px 6px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  color: #f2f3ee;
-  background: transparent;
-  font-size: 0.82rem;
-}
-
-.player-name:hover,
-.player-name:focus {
-  border-color: #536459;
-  background: #25332b;
-}
-
 .leaderboard-note {
   margin: 10px 0 0;
   color: #a7b3a5;
@@ -419,6 +444,11 @@ h1 {
 
   .status {
     margin: 0;
+  }
+
+  .player-fields {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
   }
 
   .hint {

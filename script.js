@@ -35,8 +35,8 @@ function loadLeaderboard() {
   const saved = localStorage.getItem(leaderboardStorageKey);
   if (!saved) {
     return {
-      w: { name: "White", wins: 0, draws: 0, losses: 0 },
-      b: { name: "Black", wins: 0, draws: 0, losses: 0 },
+      w: { name: "", wins: 0, draws: 0, losses: 0 },
+      b: { name: "", wins: 0, draws: 0, losses: 0 },
     };
   }
   return JSON.parse(saved);
@@ -46,11 +46,17 @@ function saveLeaderboard() {
   localStorage.setItem(leaderboardStorageKey, JSON.stringify(leaderboard));
 }
 
+function playerName(color) {
+  const defaultName = color === "w" ? "White" : "Black";
+  return leaderboard[color].name.trim() || defaultName;
+}
+
 function renderLeaderboard() {
   for (const color of ["w", "b"]) {
     const side = color === "w" ? "white" : "black";
     const player = leaderboard[color];
     document.querySelector(`#${side}-name`).value = player.name;
+    document.querySelector(`#${side}-player-name`).textContent = playerName(color);
     document.querySelector(`#${side}-points`).textContent = String(player.wins + player.draws / 2);
     document.querySelector(`#${side}-record`).textContent = `${player.wins}-${player.draws}-${player.losses}`;
   }
@@ -427,13 +433,14 @@ function pieceName(piece) {
 function renderStatus() {
   const checked = isInCheck(game, game.turn);
   const hasMoves = allLegalMoves(game).length > 0;
-  const player = game.turn === "w" ? "White" : "Black";
+  const player = playerName(game.turn);
   turnTextElement.textContent = hasMoves ? player : "Game over";
   turnIndicatorElement.classList.toggle("black", game.turn === "b");
   if (!hasMoves) {
-    recordGameResult(checked ? (game.turn === "w" ? "b" : "w") : null);
+    const winner = checked ? (game.turn === "w" ? "b" : "w") : null;
+    recordGameResult(winner);
     statusElement.textContent = checked
-      ? `Checkmate — ${game.turn === "w" ? "Black" : "White"} wins`
+      ? `Checkmate — ${playerName(winner)} wins`
       : "Draw — stalemate";
     return;
   }
@@ -513,8 +520,10 @@ for (const color of ["w", "b"]) {
   const side = color === "w" ? "white" : "black";
   const nameInput = document.querySelector(`#${side}-name`);
   nameInput.addEventListener("input", () => {
-    leaderboard[color].name = nameInput.value.trim() || (color === "w" ? "White" : "Black");
+    leaderboard[color].name = nameInput.value;
     saveLeaderboard();
+    document.querySelector(`#${side}-player-name`).textContent = playerName(color);
+    renderStatus();
   });
 }
 renderLeaderboard();
