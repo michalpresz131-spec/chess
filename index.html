@@ -11,40 +11,21 @@
   <body>
     <main class="game">
       <section class="game-layout" aria-label="Chess game">
-        <div class="game-side black-side">
-          <div class="game-title">
-            <p class="eyebrow">LOCAL TWO-PLAYER</p>
-            <h1>Chess</h1>
-          </div>
-          <div class="player-details">
-            <label class="player-name-side" for="black-name">
-              Black
-              <input class="player-name-input" id="black-name" type="text" maxlength="20" placeholder="Enter name" aria-label="Black player name" autocomplete="off">
-            </label>
-            <p class="player-move-text" id="black-move-text" aria-live="polite">Waiting</p>
-          </div>
-        </div>
         <div class="board-wrap">
           <div class="board-player black" aria-live="polite">
             <span class="board-player-marker" aria-hidden="true"></span>
             <span id="black-board-name">Black</span>
+            <span class="player-move-text" id="black-move-text">Waiting</span>
           </div>
           <div class="board" id="board" role="grid" aria-label="Chess board"></div>
+          <div class="board-watermark" aria-hidden="true">Chess</div>
           <div class="board-player white" aria-live="polite">
             <span class="board-player-marker" aria-hidden="true"></span>
             <span id="white-board-name">White</span>
+            <span class="player-move-text" id="white-move-text">White to move</span>
           </div>
         </div>
-        <div class="game-side white-side">
-          <button class="reset-button" id="reset-button" type="button">New game</button>
-          <div class="player-details">
-            <label class="player-name-side" for="white-name">
-              White
-              <input class="player-name-input" id="white-name" type="text" maxlength="20" placeholder="Enter name" aria-label="White player name" autocomplete="off">
-            </label>
-            <p class="player-move-text" id="white-move-text" aria-live="polite">White to move</p>
-          </div>
-        </div>
+        <button class="reset-button" id="reset-button" type="button">New game</button>
         <aside class="game-info">
           <section class="game-help" aria-label="Game help">
             <p class="hint">Select a piece, then choose a highlighted square.</p>
@@ -84,6 +65,14 @@
           <p>Choose a piece for your pawn.</p>
           <div class="promotion-options" id="promotion-options"></div>
         </section>
+      </div>
+      <div class="promotion-backdrop" id="name-entry-backdrop" hidden>
+        <form class="promotion-dialog name-entry-dialog" id="name-entry-form" role="dialog" aria-modal="true" aria-labelledby="name-entry-title">
+          <h2 id="name-entry-title">White player</h2>
+          <label class="name-entry-label" id="name-entry-label" for="name-entry-input">Enter White player's name</label>
+          <input class="name-entry-input" id="name-entry-input" type="text" maxlength="20" autocomplete="off">
+          <button class="reset-button" id="name-entry-submit" type="submit">Continue</button>
+        </form>
       </div>
     </main>
   </body>

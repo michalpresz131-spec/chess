@@ -3,6 +3,12 @@ const whiteMoveTextElement = document.querySelector("#white-move-text");
 const blackMoveTextElement = document.querySelector("#black-move-text");
 const promotionBackdrop = document.querySelector("#promotion-backdrop");
 const promotionOptionsElement = document.querySelector("#promotion-options");
+const nameEntryBackdrop = document.querySelector("#name-entry-backdrop");
+const nameEntryForm = document.querySelector("#name-entry-form");
+const nameEntryTitle = document.querySelector("#name-entry-title");
+const nameEntryLabel = document.querySelector("#name-entry-label");
+const nameEntryInput = document.querySelector("#name-entry-input");
+const nameEntrySubmit = document.querySelector("#name-entry-submit");
 const leaderboardStorageKey = "chess-leaderboard";
 const leaderboard = loadLeaderboard();
 
@@ -29,6 +35,7 @@ let selectedMoves = [];
 let lastMove = null;
 let pendingPromotion = null;
 let gameResultRecorded = false;
+let nameEntryColor = "w";
 
 function loadLeaderboard() {
   const saved = localStorage.getItem(leaderboardStorageKey);
@@ -45,6 +52,17 @@ function saveLeaderboard() {
   localStorage.setItem(leaderboardStorageKey, JSON.stringify(leaderboard));
 }
 
+function showNameEntry(color) {
+  nameEntryColor = color;
+  const colorName = color === "w" ? "White" : "Black";
+  nameEntryTitle.textContent = `${colorName} player`;
+  nameEntryLabel.textContent = `Enter ${colorName.toLowerCase()} player's name`;
+  nameEntryInput.value = leaderboard[color].name;
+  nameEntrySubmit.textContent = color === "w" ? "Continue" : "Start game";
+  nameEntryBackdrop.hidden = false;
+  nameEntryInput.focus();
+}
+
 function playerName(color) {
   const defaultName = color === "w" ? "White" : "Black";
   return leaderboard[color].name.trim() || defaultName;
@@ -54,7 +72,6 @@ function renderLeaderboard() {
   for (const color of ["w", "b"]) {
     const side = color === "w" ? "white" : "black";
     const player = leaderboard[color];
-    document.querySelector(`#${side}-name`).value = player.name;
     document.querySelector(`#${side}-player-name`).textContent = playerName(color);
     document.querySelector(`#${side}-board-name`).textContent = playerName(color);
     document.querySelector(`#${side}-points`).textContent = String(player.wins + player.draws / 2);
@@ -522,16 +539,18 @@ function startNewGame() {
 }
 
 document.querySelector("#reset-button").addEventListener("click", startNewGame);
-for (const color of ["w", "b"]) {
-  const side = color === "w" ? "white" : "black";
-  const nameInput = document.querySelector(`#${side}-name`);
-  nameInput.addEventListener("input", () => {
-    leaderboard[color].name = nameInput.value;
-    saveLeaderboard();
-    document.querySelector(`#${side}-player-name`).textContent = playerName(color);
-    document.querySelector(`#${side}-board-name`).textContent = playerName(color);
-    renderStatus();
-  });
-}
+nameEntryForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  leaderboard[nameEntryColor].name = nameEntryInput.value.trim().slice(0, 20);
+  saveLeaderboard();
+  if (nameEntryColor === "w") {
+    showNameEntry("b");
+    return;
+  }
+  renderLeaderboard();
+  startNewGame();
+  nameEntryBackdrop.hidden = true;
+});
 renderLeaderboard();
 startNewGame();
+showNameEntry("w");
