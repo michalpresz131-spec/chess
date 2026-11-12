@@ -230,7 +230,7 @@ p {
 .piece {
   z-index: 1;
   font-family: "DejaVu Sans", "Arial Unicode MS", serif;
-  font-size: clamp(1rem, 14cqi, 8rem);
+  font-size: 11cqi;
   line-height: 1;
   user-select: none;
   transform: translateY(-2%);
@@ -479,10 +479,6 @@ p {
 @media (max-width: 760px) {
   .game {
     padding: 20px 18px 36px;
-  }
-
-  .piece {
-    font-size: clamp(0.85rem, 9cqi, 4rem);
   }
 
   .game-layout {
